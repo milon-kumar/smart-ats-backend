@@ -19,11 +19,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+            DB::table('users')->where('role', 'candidate')->value('id')
+            ?? DB::table('users')->insertGetId([
+                'name' => 'Candidate',
+                'email' => 'candidate@example.com',
+                'password' => Hash::make('password'),
+                'role' => 'candidate',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
         $recruiterId = DB::table('users')->where('role', 'recruiter')->value('id')
             ?? DB::table('users')->insertGetId([
                 'name' => 'Recruiter Admin',
                 'email' => 'recruiter@example.com',
-                'password' => Hash::make('recruiter@example.com'),
+                'password' => Hash::make('password'),
                 'role' => 'recruiter',
                 'created_at' => now(),
                 'updated_at' => now(),
