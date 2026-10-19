@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * command: php artisan migrate --path=backend/database/migrations/0001_01_01_000000_create_users_table.php
      */
     public function up(): void
     {
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['candidate', 'recruiter'])->default('candidate');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -39,6 +41,7 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     * command: php artisan migrate:rollback --path=backend/database/migrations/0001_01_01_000000_create_users_table.php
      */
     public function down(): void
     {
